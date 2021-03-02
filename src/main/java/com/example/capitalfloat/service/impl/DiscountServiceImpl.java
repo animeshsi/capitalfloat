@@ -5,6 +5,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import com.example.capitalfloat.entity.Cart;
 import com.example.capitalfloat.entity.Discount;
+import com.example.capitalfloat.mapper.DiscountDtoToDiscountMapper;
+import com.example.capitalfloat.mapper.DiscountToDiscountDtoMapper;
+import com.example.capitalfloat.model.DiscountDto;
 import com.example.capitalfloat.repository.CartRepository;
 import com.example.capitalfloat.repository.DiscountRepository;
 import com.example.capitalfloat.service.DiscountService;
@@ -22,8 +25,10 @@ public class DiscountServiceImpl implements DiscountService {
 
 
   @Override
-  public Discount addDiscount(Discount discount) {
-    return discountRepository.save(discount);
+  public DiscountDto addDiscount(DiscountDto discountDto) {
+    Discount discount = new DiscountDtoToDiscountMapper().apply(discountDto);
+    return new DiscountToDiscountDtoMapper().apply(discountRepository.save(discount));
+
   }
 
   @Override
@@ -43,6 +48,9 @@ public class DiscountServiceImpl implements DiscountService {
             ans += cart.getQuantity() * cart.getProduct().getPrice() - (cart.getQuantity() * cart.
                 getProduct().getPrice()
                 * Long.parseLong(hashMap.get(cart.getProduct().getId()).getAmount()) / 100);
+          } else {
+            ans += cart.getQuantity() * cart.getProduct().getPrice() -
+                Long.parseLong(hashMap.get(cart.getProduct().getId()).getAmount());
           }
         }
       }

@@ -1,6 +1,6 @@
 package com.example.capitalfloat.controller;
 
-import com.example.capitalfloat.entity.Discount;
+import com.example.capitalfloat.model.DiscountDto;
 import com.example.capitalfloat.service.DiscountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +18,7 @@ public class DiscountController {
 
   @PostMapping("/discount")
   public @ResponseBody
-  Discount createDiscount(@RequestBody Discount discount)  {
+  DiscountDto createDiscount(@RequestBody DiscountDto discount) {
     return discountService.addDiscount(discount);
   }
 

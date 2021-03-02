@@ -38,5 +38,4 @@ public class Cart {
   private Product product;
 
 
-
 }
