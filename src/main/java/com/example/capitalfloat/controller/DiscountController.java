@@ -1,6 +1,9 @@
 package com.example.capitalfloat.controller;
 
+import java.util.List;
+import com.example.capitalfloat.entity.Cart;
 import com.example.capitalfloat.model.DiscountDto;
+import com.example.capitalfloat.model.Order;
 import com.example.capitalfloat.service.DiscountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,5 +28,10 @@ public class DiscountController {
   @GetMapping("/discount/{userId}")
   public Double getDiscount(@PathVariable(value = "userId") Long userId)  {
     return discountService.getDiscount(userId);
+  }
+
+  @GetMapping("/order/{userId}")
+  public Order getOrderList(@PathVariable(value = "userId") Long userId)  {
+    return discountService.getOrderList(userId);
   }
 }
